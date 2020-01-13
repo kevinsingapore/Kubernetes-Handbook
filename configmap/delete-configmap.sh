@@ -1,9 +1,11 @@
 #!/usr/bin/bash
 
-deploys=`kubectl get configmap -n default | awk '{print$1}' | tail -n +2`
+namespace=${NAMESPACE}
+
+deploys=`kubectl get configmap -n $namespace | awk '{print$1}' | tail -n +2`
 
 for i in $deploys
 do
-    kubectl delete configmap $i -n default
+    kubectl delete configmap $i -n $namespace
 done
 
